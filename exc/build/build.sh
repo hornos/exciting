@@ -1,14 +1,18 @@
 #!/bin/bash
 
+# TODO: get exe name from makefile
+
 verbose=false
 clean=false
 compile=false
+objdep=false
 
-while getopts vcm o; do
+while getopts vcmd o; do
   case "$o" in
     v) verbose=true;;
     c) clean=true;;
     m) compile=true;;
+    d) objdep=true;;
   esac
 done
 
@@ -23,8 +27,6 @@ if ${compile} ; then
     actions="${actions} "
   fi
   actions="${actions}COMPILE"
-
-  ./build/objdep.py
 fi
 
 for am in ./build/*.arch.make ; do
@@ -41,6 +43,9 @@ for am in ./build/*.arch.make ; do
     fi
 
     if ${compile} ; then
+      if ${objdep} ; then
+        make objdep
+      fi
       make
     fi
   else
@@ -49,7 +54,10 @@ for am in ./build/*.arch.make ; do
     fi
 
     if ${compile} ; then
-      make >> ./${bin_name}.build.log
+      if ${objdep} ; then
+        make objdep > ./${bin_name}.build.log
+      fi
+      make         >> ./${bin_name}.build.log
     fi
   fi
 

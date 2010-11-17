@@ -9,7 +9,6 @@ import re
 import string
 import fileinput
 
-# debug = True
 debug = False
 
 src_pat   = "src_.*"

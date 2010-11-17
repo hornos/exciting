@@ -5,6 +5,8 @@ PLAT=linux
 # compiler
 FC=ifort
 FCL=$(FC)
+XP=xsltproc
+
 
 #-----------------------------------------------------------------------
 # possible options for CPP:
