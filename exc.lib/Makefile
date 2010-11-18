@@ -36,7 +36,7 @@ LXC_URL=http://www.tddft.org/programs/octopus/down.php?file=libxc
 LXC_TGZ=libxc-1.0.tar.gz
 
 # FoX
-FOX_URL=https://github.com/tow/fox/tarball/master
+FOX_URL=https://github.com/ChristianMeisenbichler/fox/tarball/master
 FOX_TGZ=fox.tgz
 
 
