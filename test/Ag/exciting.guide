@@ -5,16 +5,16 @@ INPUTDIR="${PWD}"
 WORKDIR="${TMPDIR}/exciting-${USER}-${HOSTNAME}-$$"
 RESULTDIR="${INPUTDIR}"
 
-PRGBIN="${HOME}/exciting.stage/exc/build/exc"
+PRGBIN="${HOME}/exciting/exc/build/exc"
 PARAMS=""
 
-LIBDIR="${HOME}/exciting.stage/species"
-LIBS="Ag.xml.gz"
+LIBDIR="${HOME}/exciting/species"
+LIBS="Ag.xml.gz !excitinginput.xsd.gz"
 
 MAININPUT="Ag.input.xml"
-OTHERINPUTS="exi.xsd.gz"
+OTHERINPUTS=""
 
-ONERR="collect"
+ONERR="clean"
 
 RESULTS="*.OUT *.xml *.output"
 
@@ -22,4 +22,3 @@ RESULTS="*.OUT *.xml *.output"
 
 # LD_LIBRARY_PATH=
 
-OMP_NUM_THREADS=1
