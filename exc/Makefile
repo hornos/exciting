@@ -27,7 +27,7 @@ include Makefile.objdep
 #-------------------------------------------------------------------------------
 # Generated files
 #-------------------------------------------------------------------------------
-GFS = ./src_inputparser/inputmodules.f90 ./src_inputparser/speciesmodules.f90
+GFS = ./src_inputparser/inputmodules.f90 ./src_inputparser/speciesmodules.f90 version.inc
 
 ./src_inputparser/inputmodules.f90: ./xml/excitinginput.xsd ./xml/schematofortran.xsl
 	$(XP) ./xml/schematofortran.xsl ./xml/excitinginput.xsd > ./src_inputparser/inputmodules.f90
@@ -38,7 +38,6 @@ GFS = ./src_inputparser/inputmodules.f90 ./src_inputparser/speciesmodules.f90
 
 exciting: $(OBJS)
 	rm -f exciting
-	perl ./build/vstamp.pl
 	$(FCL) $(LDFLAGS) -o exciting $(OBJS) $(LIBS)
 
 clean:
@@ -48,6 +47,7 @@ clean:
 	rm -f ./doc/*
 
 objdep: $(GFS)
+	perl ./build/vstamp.pl
 	./build/objdep.py
 
 inputdoc:
