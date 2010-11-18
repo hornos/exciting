@@ -1,0 +1,58 @@
+SUFFIX=.f90
+
+PLAT=linux
+
+# compiler
+FC=mpif90
+CC=icc
+FCL=$(FC)
+XP=xsltproc
+
+
+#-----------------------------------------------------------------------
+# possible options for CPP:
+# XS
+# ISO
+# TETRA
+# MPI
+# MPIRHO
+# MPISEC
+#-----------------------------------------------------------------------
+
+DEFS = -DXS -DISO -DTETRA -DMPI -DMPIRHO -DMPISEC
+
+FFLAGS = -cpp $(DEFS) -O2 -unroll -scalar_rep
+
+EXCLIB = ../exc.lib
+LIB_ARPACK = $(EXCLIB)/ARPACK/arpack.$(PLAT).a \
+             $(EXCLIB)/ARPACK/arpack.util.$(PLAT).a
+
+# Netlib
+#LIB_LAPACK = $(EXCLIB)/LAPACK/lapack.$(PLAT).a
+#LIB_BLAS   = $(EXCLIB)/BLAS/blas.$(PLAT).a
+
+# Intel MKL
+MKL_PATH=$(HOME)/intel/intel-11.1/mkl
+MKL_LIBS= -L$(MKL_PATH)/lib/em64t -lmkl_blacs_lp64 \
+          -lmkl_intel_lp64 -lmkl_intel_thread \
+	  -lmkl_lapack -lmkl_core -liomp5 -lpthread
+
+LIB_LAPACK = $(MKL_LIBS)
+
+LIB_FFT    = $(EXCLIB)/libfft/libfft.a
+LIB_BZINT  = $(EXCLIB)/libbzint/libbzint.a
+LIB_LEB    = $(EXCLIB)/libleb/libleb.a
+LIB_FOX    = $(EXCLIB)/FoX/objs/lib/libFoX_dom.a \
+             $(EXCLIB)/FoX/objs/lib/libFoX_wxml.a \
+             $(EXCLIB)/FoX/objs/lib/libFoX_utils.a \
+             $(EXCLIB)/FoX/objs/lib/libFoX_sax.a \
+             $(EXCLIB)/FoX/objs/lib/libFoX_fsys.a \
+             $(EXCLIB)/FoX/objs/lib/libFoX_common.a
+LIB_XC     = $(EXCLIB)/LIBXC/src/.libs/libxc.a
+
+INCLUDES = -I$(EXCLIB)/FoX/objs/finclude \
+           -I$(EXCLIB)/LIBXC/src
+
+LIBS = $(LIB_LAPACK) $(LIB_BLAS) $(LIB_ARPACK) \
+       $(LIB_FFT) $(LIB_BZINT) $(LIB_LEB) \
+       $(LIB_FOX) $(LIB_XC)
