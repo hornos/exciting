@@ -1,29 +1,43 @@
-
-
-DL=wget -vc
-TAR=tar
-
-BLS_URL=http://www.netlib.org/blas
-BLS_TGZ=blas.tgz
-
-LAP_URL=http://www.netlib.org/lapack
-LAP_TGZ=lapack.tgz
-
-ARP_URL=ftp://ftp.caam.rice.edu/pub/software/ARPACK
-ARP_TGZ=arpack96.tar.gz
-ARP_P_TGZ=patch.tar.gz
-
-LXC_URL=http://www.tddft.org/programs/octopus/down.php?file=libxc
-LXC_TGZ=libxc-1.0.tar.gz
-
+# TODO: from git fox libbzint
+# TODO: parpack
 
 FC=ifort
+CC=icc
 FCL=$(FC)
+CCL=$(CC)
+
 FFLAGS=-O2
+CFLAGS=-O2
 
 PLAT=linux
 
+DL=wget -vc --no-check-certificate
+TAR=tar
+
+# Netlib Blas
+BLS_URL=http://www.netlib.org/blas
+BLS_TGZ=blas.tgz
 BLAS_LIB=BLAS/blas.$(PLAT).a
+
+# Netlib Lapack
+LAP_URL=http://www.netlib.org/lapack
+LAP_TGZ=lapack.tgz
+
+# Arpack
+ARP_URL=https://github.com/hpfem/arpack/tarball/master
+ARP_TGZ=arpack.tgz
+
+# libbzint
+BZI_URL=https://github.com/ChristianMeisenbichler/libbzint/tarball/master
+BZI_TGZ=libbzint.tgz
+
+# LibXC
+LXC_URL=http://www.tddft.org/programs/octopus/down.php?file=libxc
+LXC_TGZ=libxc-1.0.tar.gz
+
+# FoX
+FOX_URL=https://github.com/tow/fox/tarball/master
+FOX_TGZ=fox.tgz
 
 
 .PHONY: arpack clean blas lapack libfft fox libbzint libleb libxc all nolapack
@@ -50,24 +64,38 @@ lapack:
 arpack:
 	if ! test -d ./ARPACK;then     \
 	  if ! test -f $(ARP_TGZ);then \
-	    $(DL) $(ARP_URL)/$(ARP_TGZ);fi;   \
-	  $(TAR) xvzf $(ARP_TGZ);        \
-	  if ! test -f $(ARP_P_TGZ);then \
-	    $(DL) $(ARP_URL)/$(ARP_P_TGZ);fi; \
-	  $(TAR) xvzf $(ARP_TGZ);fi
+	    $(DL) -O $(ARP_TGZ) $(ARP_URL);fi;   \
+	  $(TAR) xvzf $(ARP_TGZ);fi; \
+	mv ./hpfem-arpack-* ./hpfem-arpack; \
+	mv ./hpfem-arpack/ARPACK ./; \
+	rm -Rf ./hpfem-arpack
+	cd ./ARPACK; make lib home=. MAKE=make RANLIB=touch FC=$(FC) CC=$(CC) FFLAGS=$(FFLAGS) CFLAGS=$(CFLAGS) PLAT=$(PLAT)
+	cd ./ARPACK; if test -f ./BLAS/libarpack.a;then \
+	mv ./BLAS/libarpack.a ./arpack.blas.$(PLAT).a;fi
+	cd ./ARPACK; if test -f ./LAPACK/libarpack.a;then \
+	mv ./LAPACK/libarpack.a ./arpack.lapack.$(PLAT).a;fi
+	cd ./ARPACK; if test -f ./SRC/libarpack.a;then \
+	mv ./SRC/libarpack.a ./arpack.$(PLAT).a;fi
+	cd ./ARPACK; if test -f ./UTIL/libarpack.a;then \
+	mv ./UTIL/libarpack.a ./arpack.util.$(PLAT).a;fi
 
-	cd ./ARPACK; make lib home=. MAKE=make RANLIB=touch FC=$(FC) FFLAGS=$(FFLAGS) PLAT=$(PLAT)
-	cd ./ARPACK; if test -f ./BLAS/libarpack_$(PLAT).a;then \
-	mv ./BLAS/libarpack_$(PLAT).a ./arpack.blas.$(PLAT).a;fi
+libbzint:
+	if ! test -d ./libbzint;then \
+	  if ! test -f $(BZI_TGZ);then \
+	    $(DL) -O $(BZI_TGZ) $(BZI_URL);fi; \
+	  $(TAR) xvzf $(BZI_TGZ); \
+	  mv ./*-libbzint-* ./libbzint;fi;
+	cd ./libbzint; mv Makefile Makefile.orig; \
+	cat Makefile.orig | sed s/^include/#include/ > Makefile
+	cd ./libbzint; make F90=$(FC) F90_OPTS=$(FFLAGS)
 
-	cd ./ARPACK; if test -f ./LAPACK/libarpack_$(PLAT).a;then \
-	mv ./LAPACK/libarpack_$(PLAT).a ./arpack.lapack.$(PLAT).a;fi
-
-	cd ./ARPACK; if test -f ./SRC/libarpack_$(PLAT).a;then \
-	mv ./SRC/libarpack_$(PLAT).a ./arpack.$(PLAT).a;fi
-
-	cd ./ARPACK; if test -f ./UTIL/libarpack_$(PLAT).a;then \
-	mv ./UTIL/libarpack_$(PLAT).a ./arpack.util.$(PLAT).a;fi
+fox:
+	if ! test -d ./FoX;then \
+	  if ! test -f $(FOX_TGZ);then \
+	    $(DL) -O $(FOX_TGZ) $(FOX_URL);fi; \
+	  $(TAR) xvzf $(FOX_TGZ); \
+	  mv ./*-fox-* ./FoX;fi;
+	cd ./FoX; ./configure FC=$(FC) FCFLAGS=$(FFLAGS) CC=$(CC) CFLAGS=$(CFLAGS); make
 
 libxc:
 	if ! test -d ./LIBXC;then     \
@@ -80,22 +108,17 @@ libxc:
 libfft:
 	cd ./libfft; make F90=$(FC) F90_OPTS=$(FFLAGS)
 
-libbzint:
-	cd ./libbzint; make F90=$(FC) F90_OPTS=$(FFLAGS)
-
 libleb:
 	cd ./libleb; make F90=$(FC) F90_OPTS=$(FFLAGS) F77=$(FC) F77_OPTS=$(FFLAGS)
-
-fox:
-	cd ./FoX; ./configure FC=$(FC) FCFLAGS=$(FFLAGS); make
 
 clean:
 	rm -fR ./BLAS
 	rm -fR ./LAPACK
 	rm -fR ./ARPACK
 	rm -fR ./LIBXC
+	rm -fR ./libbzint
+	rm -fR ./FoX
 	rm *.tar.gz *.tgz
 	cd ./libfft; make clean
-	cd ./libbzint; make clean
 	cd ./libleb; make clean
-	cd ./FoX; make clean
+
