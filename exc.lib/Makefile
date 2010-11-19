@@ -98,14 +98,14 @@ arpack:
 	    $(DL) $(ARP_URL)/$(ARP_P_TGZ);fi; \
 	  $(TAR) xvzf $(ARP_P_TGZ);fi;
 	cd ./ARPACK; make lib home=. MAKE=make RANLIB=touch FC=$(FC) CC=$(CC) FFLAGS=$(FFLAGS) CFLAGS=$(CFLAGS) PLAT=$(PLAT)
-	cd ./ARPACK; if test -f ./BLAS/libarpack.a;then \
-	mv ./BLAS/libarpack.a ./arpack.blas.$(PLAT).a;fi
-	cd ./ARPACK; if test -f ./LAPACK/libarpack.a;then \
-	mv ./LAPACK/libarpack.a ./arpack.lapack.$(PLAT).a;fi
-	cd ./ARPACK; if test -f ./SRC/libarpack.a;then \
-	mv ./SRC/libarpack.a ./arpack.$(PLAT).a;fi
-	cd ./ARPACK; if test -f ./UTIL/libarpack.a;then \
-	mv ./UTIL/libarpack.a ./arpack.util.$(PLAT).a;fi
+	cd ./ARPACK; if test -f ./BLAS/libarpack_$(PLAT).a;then \
+	mv ./BLAS/libarpack_$(PLAT).a ./arpack.blas.$(PLAT).a;fi
+	cd ./ARPACK; if test -f ./LAPACK/libarpack_$(PLAT).a;then \
+	mv ./LAPACK/libarpack_$(PLAT).a ./arpack.lapack.$(PLAT).a;fi
+	cd ./ARPACK; if test -f ./SRC/libarpack_$(PLAT).a;then \
+	mv ./SRC/libarpack_$(PLAT).a ./arpack.$(PLAT).a;fi
+	cd ./ARPACK; if test -f ./UTIL/libarpack_$(PLAT).a;then \
+	mv ./UTIL/libarpack_$(PLAT).a ./arpack.util.$(PLAT).a;fi
 
 
 parpack:
