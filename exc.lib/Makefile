@@ -96,7 +96,7 @@ arpack:
 	  $(TAR) xvzf $(ARP_TGZ); \
 	  if ! test -f $(ARP_P_TGZ);then \
 	    $(DL) $(ARP_URL)/$(ARP_P_TGZ);fi; \
-	  $(TAR) xvzf $(ARP_P_TGZ); \
+	  $(TAR) xvzf $(ARP_P_TGZ);fi;
 	cd ./ARPACK; make lib home=. MAKE=make RANLIB=touch FC=$(FC) CC=$(CC) FFLAGS=$(FFLAGS) CFLAGS=$(CFLAGS) PLAT=$(PLAT)
 	cd ./ARPACK; if test -f ./BLAS/libarpack.a;then \
 	mv ./BLAS/libarpack.a ./arpack.blas.$(PLAT).a;fi
