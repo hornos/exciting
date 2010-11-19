@@ -18,8 +18,15 @@ produces exc/Makefile.objdep from all the directories in exc/ that
 starts with src_ recursively. Fortran INCLUDE, USE (module) and
 preprocessor #include are supported.
 
-TODO: infile compiler options
+The dependency generator also supports in file rules. The following 
+comments are replaced:
+!RULE FC:[compiler]         ->   $(FC) will be [compiler]
+!RULE FFLAGS:[flags]        ->   $(FFLAGS) will be [flags]
+!RULE INCLUDES:[includes]   ->   $(INCLUDES) will be [includes]
 
+For usage and manual please refer with: http://exciting-code.org/
+
+Note: shpak run module supports exciting https://github.com/hornos/shpak
 
 Build Compilation:
 -------------------------------------------------------------------------
