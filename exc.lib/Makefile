@@ -36,7 +36,7 @@ LXC_URL=http://www.tddft.org/programs/octopus/down.php?file=libxc
 LXC_TGZ=libxc-1.0.tar.gz
 
 # FoX
-FOX_URL=https://github.com/ChristianMeisenbichler/fox/tarball/master
+FOX_URL=https://github.com/exciting/fox/tarball/master
 FOX_TGZ=fox.tgz
 
 
@@ -95,6 +95,9 @@ fox:
 	    $(DL) -O $(FOX_TGZ) $(FOX_URL);fi; \
 	  $(TAR) xvzf $(FOX_TGZ); \
 	  mv ./*-fox-* ./FoX;fi;
+#	cd ./FoX/dom; mv m_dom_dom.F90 m_dom_dom.F90.orig; \
+#	cat m_dom_dom.F90 | \
+#	sed s/integer.*parameter.*paramSettable.*/integer,parameter::paramSettable=ibset\(127956694,22\)/ > m_dom_dom.F90
 	cd ./FoX; ./configure FC=$(FC) FCFLAGS=$(FFLAGS) CC=$(CC) CFLAGS=$(CFLAGS); make
 
 libxc:
