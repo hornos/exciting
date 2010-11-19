@@ -9,7 +9,7 @@ Exciting Lite is the light version of the upstream code. Only the bare
 minimum is kept. It also features a restructured directory structure as
 well as a simple build system and Makefile topology.
 
-All the necessary auxiliary library is in exc.lib/ directory and can be
+All the necessary auxiliary libraries are in exc.lib/ directory and can be
 compiled separately. Most of them are downloaded on the fly. See
 exc.lib/Makefile.
 
