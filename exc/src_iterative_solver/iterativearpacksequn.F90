@@ -172,8 +172,14 @@ Subroutine iterativearpacksecequn (ik, ispn, apwalm, vgpc, evalfv, &
   !################################################
 !
       Do i = 1, maxitr
+#ifdef PARPACK
+         Call pznaupd (mpi_comm_world, ido, bmat, n, which, nev, tol, &
+	& resid, ncv, v, ldv, iparam, ipntr, workd, workl, lworkl, &
+	& rwork, infoznaupd)
+#else
          Call znaupd (ido, bmat, n, which, nev, tol, resid, ncv, v, &
         & ldv, iparam, ipntr, workd, workl, lworkl, rwork, infoznaupd)
+#endif
          vin => workd (ipntr(1) :ipntr(1)+n-1)
          vout => workd (ipntr(2) :ipntr(2)+n-1)
 !
@@ -214,9 +220,16 @@ Subroutine iterativearpacksecequn (ik, ispn, apwalm, vgpc, evalfv, &
      !########################
          rvec = .True.
          select = .True.
+
+#ifdef PARPACK
+         Call pzneupd (mpi_comm_world, rvec, 'A', select, d, v, n, &
+	& sigma, workev, bmat, n, which, nev, tol, resid, ncv, v, &
+	& n, iparam, ipntr, workd, workl, lworkl, rwork, info2)
+#else
          Call zneupd (rvec, 'A', select, d, v, n, sigma, workev, bmat, &
         & n, which, nev, tol, resid, ncv, v, n, iparam, ipntr, workd, &
         & workl, lworkl, rwork, info2)
+#endif
          If (info2 .Ne. 0) Then
             Print *, ' '
             Print *, ' Error with zneupd, info = ', info2

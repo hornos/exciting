@@ -17,6 +17,7 @@ XP=xsltproc
 # MPI
 # MPIRHO
 # MPISEC
+# PARPACK
 #-----------------------------------------------------------------------
 
 DEFS = -DXS -DISO -DTETRA -DMPI -DMPIRHO -DMPISEC
@@ -27,6 +28,12 @@ EXCLIB = ../exc.lib
 LIB_ARPACK = $(EXCLIB)/ARPACK/arpack.$(PLAT).a \
              $(EXCLIB)/ARPACK/arpack.util.$(PLAT).a
 
+
+#LIB_ARPACK = $(EXCLIB)/PARPACK/parpack.MPI.$(PLAT).a \
+#             $(EXCLIB)/PARPACK/parpack.util.MPI.$(PLAT).a \
+#             $(EXCLIB)/PARPACK/arpack.$(PLAT).a \
+#             $(EXCLIB)/PARPACK/arpack.util.$(PLAT).a
+
 # Netlib
 #LIB_LAPACK = $(EXCLIB)/LAPACK/lapack.$(PLAT).a
 #LIB_BLAS   = $(EXCLIB)/BLAS/blas.$(PLAT).a
@@ -35,7 +42,7 @@ LIB_ARPACK = $(EXCLIB)/ARPACK/arpack.$(PLAT).a \
 MKL_PATH=$(HOME)/intel/intel-11.1/mkl
 MKL_LIBS= -L$(MKL_PATH)/lib/em64t -lmkl_blacs_lp64 \
           -lmkl_intel_lp64 -lmkl_intel_thread \
-	  -lmkl_lapack -lmkl_core -liomp5 -lpthread
+          -lmkl_lapack -lmkl_core -liomp5 -lpthread
 
 LIB_LAPACK = $(MKL_LIBS)
 
