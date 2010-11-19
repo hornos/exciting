@@ -26,7 +26,9 @@ comments are replaced:
 
 For usage and manual please refer with: http://exciting-code.org/
 
-Note: shpak run module supports exciting https://github.com/hornos/shpak
+shpak run module supports exciting https://github.com/hornos/shpak
+
+build system is wybiwyg: https://github.com/hornos/wybiwyg
 
 Build Compilation:
 -------------------------------------------------------------------------
@@ -40,7 +42,7 @@ Build Compilation:
   Edit target.arch.make files for your needs
 
 3. Build
-  ./build -c -d -m
+  ./build -c -d -m -x exciting
 
   binaries will be renamed to target
 

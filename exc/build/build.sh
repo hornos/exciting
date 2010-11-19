@@ -6,6 +6,7 @@ verbose=false
 clean=false
 compile=false
 objdep=false
+exe=a.out
 
 while getopts vcmd o; do
   case "$o" in
@@ -13,6 +14,7 @@ while getopts vcmd o; do
     c) clean=true;;
     m) compile=true;;
     d) objdep=true;;
+    x) exe=$OPTARG;;
   esac
 done
 
@@ -62,8 +64,8 @@ for am in ./build/*.arch.make ; do
   fi
 
   if ${compile} ; then
-    if test -x ./exciting ; then
-      mv -f ./exciting ${bin_name}
+    if test -x ./${exe} ; then
+      mv -f ./${exe} ${bin_name}
     else
       echo "Error compiling ${bin_name}"
     fi
