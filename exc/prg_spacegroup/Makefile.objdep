@@ -1,0 +1,54 @@
+### OBJECTS ###
+seitzgen.o : ./seitzgen.f90 
+	$(FC) $(FFLAGS) $(INCLUDES) -c ./seitzgen.f90 -o seitzgen.o
+r3taxi.o : ./r3taxi.f90 
+	$(FC) $(FFLAGS) $(INCLUDES) -c ./r3taxi.f90 -o r3taxi.o
+initatomcounter.o : ./initatomcounter.f90 modspacegroup.o 
+	$(FC) $(FFLAGS) $(INCLUDES) -c ./initatomcounter.f90 -o initatomcounter.o
+seitzmul.o : ./seitzmul.f90 
+	$(FC) $(FFLAGS) $(INCLUDES) -c ./seitzmul.f90 -o seitzmul.o
+seitzeq.o : ./seitzeq.f90 
+	$(FC) $(FFLAGS) $(INCLUDES) -c ./seitzeq.f90 -o seitzeq.o
+writegeomxml.o : ./writegeomxml.f90 modspacegroup.o 
+	$(FC) $(FFLAGS) $(INCLUDES) -c ./writegeomxml.f90 -o writegeomxml.o
+modspacegroup.o : ./modspacegroup.f90 
+	$(FC) $(FFLAGS) $(INCLUDES) -c ./modspacegroup.f90 -o modspacegroup.o
+modmain.o : ./modmain.f90 
+	$(FC) $(FFLAGS) $(INCLUDES) -c ./modmain.f90 -o modmain.o
+gengroup.o : ./gengroup.f90 
+	$(FC) $(FFLAGS) $(INCLUDES) -c ./gengroup.f90 -o gengroup.o
+gencrystal.o : ./gencrystal.f90 modspacegroup.o 
+	$(FC) $(FFLAGS) $(INCLUDES) -c ./gencrystal.f90 -o gencrystal.o
+r3cross.o : ./r3cross.f90 
+	$(FC) $(FFLAGS) $(INCLUDES) -c ./r3cross.f90 -o r3cross.o
+main.o : ./main.f90 
+	$(FC) $(FFLAGS) $(INCLUDES) -c ./main.f90 -o main.o
+sgsymb.o : ./sgsymb.f90 
+	$(FC) $(FFLAGS) $(INCLUDES) -c ./sgsymb.f90 -o sgsymb.o
+r3mv.o : ./r3mv.f90 
+	$(FC) $(FFLAGS) $(INCLUDES) -c ./r3mv.f90 -o r3mv.o
+r3dot.o : ./r3dot.f90 
+	$(FC) $(FFLAGS) $(INCLUDES) -c ./r3dot.f90 -o r3dot.o
+r3minv.o : ./r3minv.f90 
+	$(FC) $(FFLAGS) $(INCLUDES) -c ./r3minv.f90 -o r3minv.o
+r3mm.o : ./r3mm.f90 
+	$(FC) $(FFLAGS) $(INCLUDES) -c ./r3mm.f90 -o r3mm.o
+r3frac.o : ./r3frac.f90 
+	$(FC) $(FFLAGS) $(INCLUDES) -c ./r3frac.f90 -o r3frac.o
+findprim.o : ./findprim.f90 modspacegroup.o 
+	$(FC) $(FFLAGS) $(INCLUDES) -c ./findprim.f90 -o findprim.o
+
+
+### MiSC ###
+OBJS = seitzgen.o r3taxi.o initatomcounter.o seitzmul.o seitzeq.o \
+writegeomxml.o modspacegroup.o modmain.o gengroup.o \
+gencrystal.o r3cross.o main.o sgsymb.o \
+r3mv.o r3dot.o r3minv.o r3mm.o \
+r3frac.o findprim.o 
+
+SRCS = ./seitzgen.f90 ./r3taxi.f90 ./initatomcounter.f90 ./seitzmul.f90 ./seitzeq.f90 \
+./writegeomxml.f90 ./modspacegroup.f90 ./modmain.f90 ./gengroup.f90 \
+./gencrystal.f90 ./r3cross.f90 ./main.f90 ./sgsymb.f90 \
+./r3mv.f90 ./r3dot.f90 ./r3minv.f90 ./r3mm.f90 \
+./r3frac.f90 ./findprim.f90 
+
