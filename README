@@ -1,5 +1,5 @@
                _ _   _               _ _ _
-  _____  _____(_) |_(_)_ __   __ _  | (_) |
+  _____  _____(_) |_(_)_ __   __ _  | (_) |_ ___
  / _ \ \/ / __| | __| | '_ \ / _` | | | | __/ _ \
  | __/>  < (__| | |_| | | | | (_| | | | | ||  __/
  \___/_/\_\___|_|\__|_|_| |_|\__, | |_|_|\__\___|
@@ -26,9 +26,7 @@ comments are replaced:
 
 For usage and manual please refer with: http://exciting-code.org/
 
-shpak run module supports exciting https://github.com/hornos/shpak
-
-build system is wybiwyg: https://github.com/hornos/wybiwyg
+Note: shpak run module supports exciting https://github.com/hornos/shpak
 
 Build Compilation:
 -------------------------------------------------------------------------
@@ -42,7 +40,7 @@ Build Compilation:
   Edit target.arch.make files for your needs
 
 3. Build
-  ./build -c -d -m -x exciting
+  ./build -c -d -m
 
   binaries will be renamed to target
 

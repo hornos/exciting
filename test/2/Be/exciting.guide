@@ -1,0 +1,25 @@
+# for batch scheduler comment out
+TMPDIR=/tmp
+
+INPUTDIR="${PWD}"
+WORKDIR="${TMPDIR}/exciting-${USER}-${HOSTNAME}-$$"
+RESULTDIR="${INPUTDIR}"
+
+PRGBIN="${HOME}/exciting.stage/exc/build/exc"
+PARAMS=""
+
+LIBDIR="${HOME}/exciting.stage/species"
+LIBS="Be.xml.gz !excitinginput.xsd.gz"
+
+# 1. step: ground state
+MAININPUT="Be.input.xml"
+OTHERINPUTS=""
+# restart
+# OTHERINPUTS="STATE.OUT.gz EFERMI.OUT.gz EVALSV.OUT.gz EVE??V.OUT.gz"
+RESULTS="*.OUT *.xml *.output"
+
+ONERR="clean"
+
+# PRERUN="mpirun ${HYBMPI_MPIRUN_OPTS}"
+
+# LD_LIBRARY_PATH=

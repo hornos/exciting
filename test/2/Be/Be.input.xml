@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="http://xml.exciting-code.org/inputfileconverter/inputtohtml.xsl" type="text/xsl"?>
+
+<input xsi:noNamespaceSchemaLocation="excitinginput.xsd"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsltpath=".">
+
+  <title>Be</title>
+  <structure speciespath=".">
+    <crystal scale="4.290" >
+      <basevect>0.500000000 -0.866025402  0.000000000</basevect>
+      <basevect>0.500000000  0.866025402  0.000000000</basevect>
+      <basevect>0.000000000  0.000000000  1.581497800</basevect>
+    </crystal>
+    <species speciesfile="Be.xml">
+      <atom coord="0.333333333  0.666666667  0.250000000" ></atom>
+      <atom coord="0.666666667  0.333333333  0.750000000" ></atom>
+    </species>
+  </structure>
+  <groundstate ngridk="10 10 10" 
+               xctype="LSDAPerdew-Wang"
+               stype="Methfessel-Paxton 1"
+               swidth="0.001"
+               gmaxvr="14"
+               rgkmax="7.0">
+  </groundstate>
+  <properties>
+    <dos nsmdos="0" winddos="-3.0 1.5" />
+  </properties>
+ 
+</input>
