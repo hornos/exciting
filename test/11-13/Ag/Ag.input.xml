@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="http://xml.exciting-code.org/inputfileconverter/inputtohtml.xsl" type="text/xsl"?>
+
+<input xsi:noNamespaceSchemaLocation="excitinginput.xsd"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsltpath=".">
+
+  <title>Ag</title>
+
+  <structure speciespath=".">
+    <crystal scale="3.817">
+      <basevect>1.0 1.0 0.0</basevect>
+      <basevect>1.0 0.0 1.0</basevect>
+      <basevect>0.0 1.0 1.0</basevect>
+    </crystal>
+    <species speciesfile="Ag.xml">
+      <atom coord="0.0  0.0  0.0" />
+    </species>
+  </structure>
+  <groundstate ngridk="8  8  8"></groundstate>
+</input>

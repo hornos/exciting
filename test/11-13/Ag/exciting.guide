@@ -1,0 +1,35 @@
+# for batch scheduler comment out
+TMPDIR=/tmp
+
+INPUTDIR="${PWD}"
+WORKDIR="${TMPDIR}/exciting-${USER}-${HOSTNAME}-$$"
+RESULTDIR="${INPUTDIR}"
+
+PRGBIN="${HOME}/exciting.stage/exc/build/exc"
+PARAMS=""
+
+LIBDIR="${HOME}/exciting.stage/species"
+LIBS="Ag.xml.gz !excitinginput.xsd.gz"
+
+# 1. step: ground state
+MAININPUT="Ag.input.xml"
+OTHERINPUTS=""
+RESULTS="*.OUT *.xml *.output"
+
+# 2. step: dos
+# MAININPUT="Ag.dos.input.xml"
+
+# 3. step: band
+# MAININPUT="Ag.band.input.xml"
+
+# for 2. & 3.
+# OTHERINPUTS="STATE.OUT.gz EFERMI.OUT.gz EVALSV.OUT.gz EVE??V.OUT.gz"
+# RESULTS="*DOS*.* dos.* bandstructure.*"
+
+ONERR="keep"
+
+# PRERUN="mpirun ${HYBMPI_MPIRUN_OPTS}"
+
+# LD_LIBRARY_PATH=
+
+OMP_NUM_THREADS=2
