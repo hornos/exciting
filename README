@@ -40,7 +40,7 @@ Build Compilation:
   Edit target.arch.make files for your needs
 
 3. Build
-  ./build -c -d -m
+  ./build -c -d -m -x exciting
 
   binaries will be renamed to target
 
