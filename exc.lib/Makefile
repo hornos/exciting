@@ -133,7 +133,7 @@ libbzint:
 	  if ! test -f $(BZI_TGZ);then \
 	    $(DL) -O $(BZI_TGZ) $(BZI_URL);fi; \
 	  $(TAR) xvzf $(BZI_TGZ); \
-	  mv ./*-libbzint-* ./libbzint;fi;
+	  mv ./*libbzint-* ./libbzint;fi;
 	cd ./libbzint; mv Makefile Makefile.orig; \
 	cat Makefile.orig | sed s/^include/#include/ > Makefile
 	cd ./libbzint; make F90=$(FC) F90_OPTS=$(FFLAGS)
@@ -152,7 +152,7 @@ libxc:
 	    $(DL) $(LXC_URL)/$(LXC_TGZ);fi;   \
 	  $(TAR) xvzf $(LXC_TGZ); \
 	  mv libxc-?.? LIBXC;fi
-	cd ./LIBXC; ./configure FC=$(FC) FCFLAGS=$(FFLAGS); make
+	cd ./LIBXC; ./configure CC=$(CC) CFLAGS=$(CFLAGS) FC=$(FC) FCFLAGS=$(FFLAGS); make
 
 libfft:
 	cd ./libfft; make F90=$(FC) F90_OPTS=$(FFLAGS)
