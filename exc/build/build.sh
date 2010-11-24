@@ -1,14 +1,12 @@
 #!/bin/bash
 
-# TODO: get exe name from makefile
-
 verbose=false
 clean=false
 compile=false
 objdep=false
 exe=a.out
 
-while getopts vcmd o; do
+while getopts vcmdx: o; do
   case "$o" in
     v) verbose=true;;
     c) clean=true;;
