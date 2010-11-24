@@ -22,7 +22,7 @@ PARP_TGZ=parpack96.tar.gz
 PARP_P_TGZ=ppatch.tar.gz
 
 # libbzint
-BZI_URL=https://github.com/ChristianMeisenbichler/libbzint/tarball/master
+BZI_URL=https://github.com/exciting/libbzint/tarball/master
 BZI_TGZ=libbzint.tgz
 
 # LibXC
