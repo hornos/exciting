@@ -199,8 +199,8 @@ Subroutine portstate (act)
             Read (50) spr_ (1:nrmt_(is), is)
             if (act .eq. 1) then
                Write (51, '(a)') '<data name = "natoms" type = "integer" d&
-              &imension = "1" shape = "1" index = "species" indexval = "' // &
-              & trim (i2str(is)) // '">'
+              &imension = "1" shape = "1" index = "species" indexval = "' &
+              & // trim (i2str(is)) // '">'
                Write (51,*) natoms_ (is)
                Write (51, '(a)') '</data>'
                Write (51, '(a)') '<data name = "nrmt" type = "integer" dim&
