@@ -51,18 +51,18 @@ lapack:
 	if ! test -d ./LAPACK;then   \
 	  if ! test -f $(LAP_TGZ);then \
 	    $(DL) $(LAP_URL)/$(LAP_TGZ);fi; \
-	  $(TAR) xvzf $(LAP_TGZ);mv lapack-?.?.? LAPACK;fi
-	cd ./LAPACK; cp make.inc.example make.inc
+	  $(TAR) xvzf $(LAP_TGZ);mv lapack-?.?.? LAPACK; \
+	  cd ./LAPACK; cp make.inc.example make.inc;fi
 	cd ./LAPACK; make FORTRAN=$(FC) LOADER=$(FCL) PLAT=.$(PLAT) OPTS=$(FFLAGS) BLASLIB=../../../$(BLAS_LIB)
 
 arpack.git:
 	if ! test -d ./ARPACK.git;then     \
 	  if ! test -f $(GIT_ARP_TGZ);then \
 	    $(DL) -O $(GIT_ARP_TGZ) $(GIT_ARP_URL);fi;   \
-	  $(TAR) xvzf $(GIT_ARP_TGZ);fi; \
-	mv ./hpfem-arpack-* ./hpfem-arpack; \
-	mv ./hpfem-arpack/ARPACK ./ARPACK.git; \
-	rm -Rf ./hpfem-arpack
+	  $(TAR) xvzf $(GIT_ARP_TGZ); \
+	  mv ./hpfem-arpack-* ./hpfem-arpack; \
+	  mv ./hpfem-arpack/ARPACK ./ARPACK.git; \
+	  rm -Rf ./hpfem-arpack; fi
 	cd ./ARPACK.git; make lib home=. MAKE=make RANLIB=touch FC=$(FC) CC=$(CC) FFLAGS=$(FFLAGS) CFLAGS=$(CFLAGS) PLAT=$(PLAT)
 	cd ./ARPACK.git; if test -f ./BLAS/libarpack.a;then \
 	mv ./BLAS/libarpack.a ./arpack.blas.$(PLAT).a;fi
@@ -172,4 +172,3 @@ clean:
 	rm *.tar.gz *.tgz
 	cd ./libfft; make clean
 	cd ./libleb; make clean
-
