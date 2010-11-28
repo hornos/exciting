@@ -5,6 +5,7 @@ clean=false
 compile=false
 objdep=false
 exe=a.out
+bindir="./bin"
 
 while getopts vcmdx: o; do
   case "$o" in
@@ -15,6 +16,13 @@ while getopts vcmdx: o; do
     x) exe=$OPTARG;;
   esac
 done
+
+
+if ${compile} ; then
+  if ! test -d ${bindir} ; then
+    mkdir ${bindir}
+  fi
+fi
 
 cd ..
 
@@ -31,8 +39,10 @@ fi
 
 for am in ./build/*.arch.make ; do
   bin_name=${am%%.arch.make}
+  bin_name=$(basename ${bin_name})
+  bin_name="build/bin/${bin_name}"
+
   ln -sf ${am} ./arch.make
-#  cp ${am} ./arch.make
 
   echo
   echo "[$actions] ${bin_name}"
@@ -63,11 +73,13 @@ for am in ./build/*.arch.make ; do
 
   if ${compile} ; then
     if test -x ./${exe} ; then
-      mv -f ./${exe} ${bin_name}
+      mv -f ./${exe} ./${bin_name}
     else
       echo "Error compiling ${bin_name}"
     fi
   fi
+  if ${clean} ; then
+    rm -f ./arch.make
+  fi
 done
 echo
-
