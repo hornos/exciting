@@ -24,8 +24,8 @@ DEFS = -DXS -DISO -DTETRA
 FFLAGS = -cpp $(DEFS) -O2 -unroll -scalar_rep
 
 EXCLIB = ../exc.lib
-LIB_ARPACK = $(EXCLIB)/ARPACK/arpack.$(PLAT).a \
-             $(EXCLIB)/ARPACK/arpack.util.$(PLAT).a
+LIB_ARPACK = $(EXCLIB)/ARPACK.git/arpack.$(PLAT).a \
+             $(EXCLIB)/ARPACK.git/arpack.util.$(PLAT).a
 
 # Netlib
 #LIB_LAPACK = $(EXCLIB)/LAPACK/lapack.$(PLAT).a
