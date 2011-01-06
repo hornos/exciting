@@ -31,5 +31,4 @@ outerr.*
 ._.DS*
 gitlog.txt
 exc/arch.make
-exc/Makefile.objdep
 exc/build/bin/
