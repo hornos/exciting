@@ -13,11 +13,23 @@ Subroutine propertylauncher
 ! properties which depend on the ground state only
 
       If (associated(input%properties%bandstructure) .And. rank .Eq. 0) Then
+         call rereadinput
          ! tasks are: 20, 21
          task = 20
          Call bandstr
       End If
+      If (associated(input%properties%fermisurfaceplot) .And. rank .Eq. 0) Then
+         call rereadinput
+         If (input%properties%fermisurfaceplot%separate) Then
+            task = 101
+            Call fermisurf
+         Else
+            task = 100
+            Call fermisurf
+         End If
+      End If
       If (associated(input%properties%dos) .And. rank .Eq. 0) Then
+         call rereadinput
          task = 10
          Call dos
       End If
@@ -30,23 +42,19 @@ Subroutine propertylauncher
          Call wfplot (STM)
       End If
       If (associated(input%properties%LSJ) .And. rank .Eq. 0) Then
+         call rereadinput
+! read in input again to reset the magnetic moments for proper symmetry after
+! a possible run of the groundstate
          task=15
          if (associated(input%properties%LSJ%kstlist)) task=16
          Call writelsj
       End If
       If (associated(input%properties%masstensor) .And. rank .Eq. 0) Then
+         call rereadinput
          task=25
          Call effmass
       End If
-      If (associated(input%properties%fermisurfaceplot) .And. rank .Eq. 0) Then
-         If (input%properties%fermisurfaceplot%separate) Then
-            task = 101
-            Call fermisurf
-         Else
-            task = 100
-            Call fermisurf
-         End If
-      End If
+
       If (associated(input%properties%chargedensityplot) .And. rank .Eq. 0) Then
          Call rhoplot
       End If
@@ -96,12 +104,14 @@ Subroutine propertylauncher
          Call mossbauer
       End If
       If (associated(input%properties%expiqr) .And. rank .Eq. 0) Then
+         call rereadinput
          Call writeexpiqr
       End If
       If (associated(input%properties%elnes) .And. rank .Eq. 0) Then
          Call elnes
       End If
       If (associated(input%properties%momentummatrix) .And. rank .Eq. 0) Then
+         call rereadinput
          task = 120
          Call writepmatxs
       End If
@@ -109,6 +119,7 @@ Subroutine propertylauncher
 ! properties which depend on the ground state and/or on the outputs of other properties
 
       If (associated(input%properties%dielectric) .And. rank .Eq. 0) Then
+         call rereadinput
          ! set the default values if dos element not present
          if (.not.associated(input%properties%dos)) &
            input%properties%dos => getstructdos (emptynode)
@@ -118,6 +129,7 @@ Subroutine propertylauncher
          Call dielectric
       End If
       If (associated(input%properties%moke) .And. rank .Eq. 0) Then
+         call rereadinput
          ! set the default values if dos element not present
          if (.not.associated(input%properties%dos)) &
            input%properties%dos => getstructdos (emptynode)

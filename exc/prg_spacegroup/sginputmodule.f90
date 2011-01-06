@@ -1191,7 +1191,11 @@ if(associated(np)) then
 endif
 
             len= countChildEmentsWithName(thisnode,"lattice")
-getstructsymmetries%lattice=>null()
+
+        if(len.eq.0) then
+        write(*,*)"Parser ERROR: The symmetries element must contain at least 1 lattice element"
+        endif
+        getstructsymmetries%lattice=>null()
 Do i=0,len-1
 getstructsymmetries%lattice=>getstructlattice(&
 removeChild(thisnode,item(getElementsByTagname(thisnode,&
