@@ -49,7 +49,7 @@ clean:
 	rm -f ./doc/*
 
 objdep: $(GFS)
-	./build/objdep.py
+	./build/objdep.py -x .f90
 
 inputdoc:
 	cd doc; \

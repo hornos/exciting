@@ -26,7 +26,7 @@ BZI_URL=https://github.com/exciting/libbzint/tarball/master
 BZI_TGZ=libbzint.tgz
 
 # LibXC
-LXC_URL=http://www.tddft.org/programs/octopus/down.php?file=libxc
+LXC_URL=http://www.tddft.org/programs/octopus/download/libxc
 LXC_TGZ=libxc-1.0.tar.gz
 
 # FoX
